@@ -3,7 +3,7 @@ const express = require('express');
 const server = express();
 server.use(express.json());
 
-const posts = [];
+const posts = [{ id: 1, name: 'holden' }];
 
 server.post('/create', async (req, res) => {
 	const post = req.body;
@@ -18,14 +18,16 @@ server.post('/create', async (req, res) => {
 
 server.delete('/remove/:id', async (req, res) => {
 	const { id } = req.params;
-	let index = posts.findIndex(post => post.id === parseInt(id, 10));
+	let index = await posts.findIndex(post => post.id === parseInt(id, 10));
+
 	if (index !== -1) {
-		const removed = posts.splice(index, 1);
-		console.log(removed[0], posts);
-		res.status(200).json(removed[0]);
+		const removed = await posts.splice(index, 1);
+		res.status(200).json({ removed: 1 });
 	} else {
 		res.status(404).end();
 	}
 });
+
+server.use(express.json());
 
 module.exports = server;

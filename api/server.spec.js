@@ -50,7 +50,7 @@ describe('DELETE /remove endpoint', () => {
 		const id = 1;
 		let response = await request(server).delete(`/remove/${id}`);
 
-		expect(response.body).toBe({ removed: 1 });
+		expect(response.body).toEqual({ removed: 1 });
 		expect(response.type).toMatch(/json/i);
 	});
 });
