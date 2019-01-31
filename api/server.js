@@ -22,7 +22,8 @@ server.delete('/remove/:id', async (req, res) => {
 
 	if (index !== -1) {
 		const removed = await posts.splice(index, 1);
-		res.status(200).json({ removed: 1 });
+		let numRemoved = removed.length;
+		res.status(200).json({ removed: numRemoved });
 	} else {
 		res.status(404).end();
 	}
