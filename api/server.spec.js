@@ -45,4 +45,12 @@ describe('DELETE /remove endpoint', () => {
 
 		expect(response.status).toBe(404);
 	});
+
+	it('should respond with number of items deleted', async () => {
+		const id = 1;
+		let response = await request(server).delete(`/remove/${id}`);
+
+		expect(response.body).toBe({ removed: 1 });
+		expect(response.type).toMatch(/json/i);
+	});
 });
